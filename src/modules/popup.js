@@ -11,7 +11,6 @@ const popup = () => {
             callbackForm.style.display = 'none';
         } else {
             giftForm.style.display = 'none';
-            fixedGift.style.display = 'block';
         }
     };
 
