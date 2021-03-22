@@ -4,7 +4,8 @@ const burgerMenu = () => {
         menu = document.querySelector('.top-menu'),
         head = document.querySelector('.head'),
         headHeight = head.clientHeight,
-        menuBtnDisplay = window.getComputedStyle(menuBtn).display;
+        menuBtnDisplay = window.getComputedStyle(menuBtn).display,
+        topMenu = document.querySelector('.top-menu');
 
 //Фиксация БУРГЕР-меню при скролле
     const fixedMenuFunc = () => {
@@ -49,12 +50,10 @@ const burgerMenu = () => {
         }
     };
 
-    window.addEventListener('click', event => {
+    menuBtn.addEventListener('click', menuOpenClose);
+    popupMenu.addEventListener('click', event => {
         const target = event.target;
-
-        if(target.closest('.menu-button')){
-            menuOpenClose();
-        } else if(target.closest('.close-menu-btn') || target.tagName === 'A'){
+        if(target.closest('.close-menu-btn') || target.tagName === 'A'){
             menuOpenClose();
         }
     });
