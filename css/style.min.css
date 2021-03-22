@@ -1121,6 +1121,12 @@ header nav.top-menu .menu-button {
     text-align: right
 }
 
+.fixed-menu{
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
 header nav.top-menu .menu-button img {
     max-width: 40px;
     position: relative;
