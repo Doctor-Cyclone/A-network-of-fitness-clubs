@@ -4,8 +4,7 @@ const burgerMenu = () => {
         menu = document.querySelector('.top-menu'),
         head = document.querySelector('.head'),
         headHeight = head.clientHeight,
-        menuBtnDisplay = window.getComputedStyle(menuBtn).display,
-        topMenu = document.querySelector('.top-menu');
+        menuBtnDisplay = window.getComputedStyle(menuBtn).display;
 
 //Фиксация БУРГЕР-меню при скролле
     const fixedMenuFunc = () => {
