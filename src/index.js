@@ -1,5 +1,5 @@
 'use strict';
 
-import xxx from './modules/test';
+import clubChoice from './modules/clubChoice';
 
-xxx();
+clubChoice();
