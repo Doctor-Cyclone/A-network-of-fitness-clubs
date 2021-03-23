@@ -1,3 +1,4 @@
+import closePopup from './closePopup';
 import popupThanks from './popupThanks';
 popupThanks();
 const sendForm = (id) => {
@@ -14,6 +15,9 @@ const sendForm = (id) => {
         useOfPersonalData = form.querySelector('input[type=checkbox]'),
         formInputs = form.querySelectorAll('input'),
 
+        inputName = form.querySelectorAll('[name = "name"]'),
+        inputPhone = form.querySelectorAll('[name = "phone"]'),
+        
         sendBtn = form.querySelector('button'),
 
         thanks = document.getElementById('thanks'),
@@ -21,6 +25,9 @@ const sendForm = (id) => {
         clubs = form.querySelectorAll('[name = "club-name"]');
 
         statusMessage.style.color = '#FFD11A';
+        statusMessage.style.textAlign = 'center';
+        statusMessage.style.fontSize = '20px';
+
     //Проверка чекбокса с обработкой персональных данных
     const useOfPersonalDataCheck = () => {
         if(useOfPersonalData){
@@ -68,8 +75,9 @@ const sendForm = (id) => {
     };
 
     form.addEventListener('submit', (event) => {
-        event.preventDefault();
 
+        event.preventDefault();
+        
         form.appendChild(statusMessage);
         statusMessage.innerHTML = loadMessage;
         
@@ -91,6 +99,11 @@ const sendForm = (id) => {
                 statusMessage.textContent = '';
 
                 clearInputAfterSubmit();
+
+                setTimeout(() => {
+                    closePopup();
+                    thanks.style.display = 'none';
+                }, 2000);
                 
             })
             .catch((error) => {

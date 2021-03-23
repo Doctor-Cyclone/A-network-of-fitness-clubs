@@ -7,6 +7,7 @@ import burgerMenu from './modules/burgerMenu';
 import inputValidation from './modules/inputValidation';
 import showArrowAfterScroll from './modules/showArrowAfterScroll';
 import sendForm from './modules/sendForm';
+import calculator from './modules/calculator.js';
 
 clubChoice();
 popup();
@@ -14,6 +15,7 @@ mainSlider();
 burgerMenu();
 showArrowAfterScroll();
 inputValidation();
+calculator();
 
 sendForm('banner-form');
 sendForm('card_order');

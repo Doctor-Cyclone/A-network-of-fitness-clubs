@@ -27,9 +27,10 @@ const inputValidation = () => {
             if(item.getAttribute('name') === 'phone'){
                 item.value = item.value.replace(/\d{12,}/g, item.value.substr(0, 11));
 
-                if(/\+?[78]([-()]*\d){10}/g.test(item.value.replace(/\s{1,}/g, ''))){
+                if(/\+?[78]([-()]*\d){10}/g.test(item.value.replace(/\s{1,}/g, ''))){                
                     return;
                 } else {
+                    item.setCustomValidity(`Количество чисел должно быть 11`);
                     item.value = '';
                 }
             }
