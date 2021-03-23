@@ -17,20 +17,23 @@ const popup = () => {
     window.addEventListener('click', event => {
         const target = event.target;
 
-        if(target.classList.contains('open-popup')){
-            freeVisitForm.style.display = 'block';
-        } else if(target.classList.contains('callback-btn')){
-            callbackForm.style.display = 'block';
-        } else if(target.closest('.fixed-gift')){
-            fixedGift.style.display = 'none';
-            giftForm.style.display = 'block';
-        } else if(target.closest('.close-form')){
-            closePopup(target);
-        } else if(target.closest('.overlay')){
-            closePopup(target);
-        } else if(target.closest('.close-btn')){
-            closePopup(target);
+        if(!target.hasAttribute('type')){
+            if(target.classList.contains('open-popup')){
+                freeVisitForm.style.display = 'block';
+            } else if(target.classList.contains('callback-btn')){
+                callbackForm.style.display = 'block';
+            } else if(target.closest('.fixed-gift')){
+                fixedGift.style.display = 'none';
+                giftForm.style.display = 'block';
+            } else if(target.closest('.close-form')){
+                closePopup(target);
+            } else if(target.closest('.overlay')){
+                closePopup(target);
+            } else if(target.closest('.close-btn')){
+                closePopup(target);
+            }
         }
+        
     });
 };
 

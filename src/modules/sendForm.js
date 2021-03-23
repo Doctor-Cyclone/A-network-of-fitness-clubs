@@ -8,16 +8,19 @@ const sendForm = (id) => {
                         <p>Ваша заявка отправлена. <br> Мы свяжемся с вами в ближайшее время.</p>
                         <button class="btn close-btn">OK</button>`,
         loadMessage = 'Загрузка...',
-        form = document.getElementById(id),
-        formInputs = form.querySelectorAll('input'),
         statusMessage = document.createElement('div'),
+
+        form = document.getElementById(id),
         useOfPersonalData = form.querySelector('input[type=checkbox]'),
+        formInputs = form.querySelectorAll('input'),
+
         sendBtn = form.querySelector('button'),
+
         thanks = document.getElementById('thanks'),
-        thanksFormContent = thanks.querySelector('.form-content');
+        thanksFormContent = thanks.querySelector('.form-content'),
+        clubs = form.querySelectorAll('[name = "club-name"]');
 
         statusMessage.style.color = '#FFD11A';
-
     //Проверка чекбокса с обработкой персональных данных
     const useOfPersonalDataCheck = () => {
         if(useOfPersonalData){
@@ -29,13 +32,39 @@ const sendForm = (id) => {
     };
     useOfPersonalDataCheck();
 
+    //Проверка radio-button с выбором клуба
+    const chooseClubCheck = () => {
+        if(clubs){
+            sendBtn.disabled = true;
+            clubs.forEach( item => {
+                if(item.checked){
+                    sendBtn.disabled = false;
+                } else {
+                    item.addEventListener('change', () => {
+                        sendBtn.disabled = false;
+                    });
+                }
+            });
+        }
+    };
+    chooseClubCheck();
+
+    //Очистка полей
     const clearInputAfterSubmit = () => {
-        //Очистка полей после отправки данных
+        //Очистка input после отправки данных
         formInputs.forEach( item => {
             item.value = '';
         });
-        //Снатие галочки после отправки данных
-        useOfPersonalData.checked = false;
+        //Очистка radio-button с выбором клуба
+        if(clubs){
+            clubs.forEach( item => {
+                item.checked = false;
+            });
+        }
+        //Очистка чекбокса с обработкой персональных данных
+        if(useOfPersonalData){
+            useOfPersonalData.checked = false;
+        }
     };
 
     form.addEventListener('submit', (event) => {
@@ -43,8 +72,9 @@ const sendForm = (id) => {
 
         form.appendChild(statusMessage);
         statusMessage.innerHTML = loadMessage;
-
+        
         const formData = new FormData(form);
+
         let body = {};
         formData.forEach( (value, key) => {
             body[key] = value;
