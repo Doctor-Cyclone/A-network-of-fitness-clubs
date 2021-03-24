@@ -72,7 +72,7 @@ const sendForm = (id) => {
         }
               
     });
-
+    //Функция отправки
     const sendFunc = () => {
         form.appendChild(statusMessage);
                 statusMessage.innerHTML = loadMessage;
