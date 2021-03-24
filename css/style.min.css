@@ -2223,7 +2223,7 @@ p.personal-data input[type=checkbox]:not(checked)+label:before {
         opacity: 1;
     }
     100%{
-        transform: scale(1.2);
+        transform: scale(1.4);
         opacity: 0;
     }
 }

@@ -25,12 +25,25 @@ const inputValidation = () => {
                 }                
             }
             if(item.getAttribute('name') === 'phone'){
+                item.value = item.value.replace(/\-{1,}/g, '');
+                item.value = item.value.replace(/\s{1,}/g, '');
+                item.value = item.value.replace(/\+{1,}/g, '');
+                item.value = item.value.replace(/\({1,}/g, '');
+                item.value = item.value.replace(/\){1,}/g, '');
+                item.value = item.value.replace(/^[\s]+|[ \s]+$/, '');
+                item.value = item.value.replace(/^[/-]+|[/-]+$/, '');
+
                 item.value = item.value.replace(/\d{12,}/g, item.value.substr(0, 11));
+
+                let phoneLength = item.value.split('').length;
 
                 if(/\+?[78]([-()]*\d){10}/g.test(item.value.replace(/\s{1,}/g, ''))){                
                     return;
                 } else {
                     //item.setCustomValidity(`Количество чисел должно быть 11`);
+                    if(phoneLength < 11){
+                        alert(`Вы ввели ${phoneLength} цифр из 11!`);
+                    }
                     item.value = '';
                 }
             }
