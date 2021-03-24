@@ -31,9 +31,12 @@ const sendForm = (id) => {
     //Проверка чекбокса с обработкой персональных данных
     const useOfPersonalDataCheck = () => {
         if(useOfPersonalData){
-            sendBtn.disabled = true;
             useOfPersonalData.addEventListener('change', () => {
-                sendBtn.disabled = false;
+                if(useOfPersonalData.checked){
+                    sendBtn.disabled = false;
+                } else {
+                    sendBtn.disabled = true;
+                }
             });
         }
     };
