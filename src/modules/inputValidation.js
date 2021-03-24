@@ -41,10 +41,10 @@ const inputValidation = () => {
                     return;
                 } else {
                     //item.setCustomValidity(`Количество чисел должно быть 11`);
+                    item.value = '';
                     if(phoneLength < 11){
                         alert(`Вы ввели ${phoneLength} цифр из 11!`);
                     }
-                    item.value = '';
                 }
             }
         });
