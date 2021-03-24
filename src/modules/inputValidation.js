@@ -30,7 +30,7 @@ const inputValidation = () => {
                 if(/\+?[78]([-()]*\d){10}/g.test(item.value.replace(/\s{1,}/g, ''))){                
                     return;
                 } else {
-                    item.setCustomValidity(`Количество чисел должно быть 11`);
+                    //item.setCustomValidity(`Количество чисел должно быть 11`);
                     item.value = '';
                 }
             }
