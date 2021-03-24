@@ -13,6 +13,7 @@ const sendForm = (id) => {
 
         form = document.getElementById(id),
         useOfPersonalData = form.querySelector('input[type=checkbox]'),
+        clubs = form.querySelectorAll('[name = "club-name"]'),
         formInputs = form.querySelectorAll('input'),
 
         inputName = form.querySelectorAll('[name = "name"]'),
@@ -21,43 +22,11 @@ const sendForm = (id) => {
         sendBtn = form.querySelector('button'),
 
         thanks = document.getElementById('thanks'),
-        thanksFormContent = thanks.querySelector('.form-content'),
-        clubs = form.querySelectorAll('[name = "club-name"]');
+        thanksFormContent = thanks.querySelector('.form-content');
 
         statusMessage.style.color = '#FFD11A';
         statusMessage.style.textAlign = 'center';
         statusMessage.style.fontSize = '20px';
-
-    //Проверка чекбокса с обработкой персональных данных
-    const useOfPersonalDataCheck = () => {
-        if(useOfPersonalData){
-            useOfPersonalData.addEventListener('change', () => {
-                if(useOfPersonalData.checked){
-                    sendBtn.disabled = false;
-                } else {
-                    sendBtn.disabled = true;
-                }
-            });
-        }
-    };
-    useOfPersonalDataCheck();
-
-    //Проверка radio-button с выбором клуба
-    const chooseClubCheck = () => {
-        if(clubs){
-            sendBtn.disabled = true;
-            clubs.forEach( item => {
-                if(item.checked){
-                    sendBtn.disabled = false;
-                } else {
-                    item.addEventListener('change', () => {
-                        sendBtn.disabled = false;
-                    });
-                }
-            });
-        }
-    };
-    chooseClubCheck();
 
     //Очистка полей
     const clearInputAfterSubmit = () => {
@@ -78,46 +47,63 @@ const sendForm = (id) => {
     };
 
     form.addEventListener('submit', (event) => {
-
         event.preventDefault();
-        
-        form.appendChild(statusMessage);
-        statusMessage.innerHTML = loadMessage;
-        
-        const formData = new FormData(form);
 
-        let body = {};
-        formData.forEach( (value, key) => {
-            body[key] = value;
+        inputName.forEach( name => {
+            if(name.value !== ''){
+                inputPhone.forEach( phone => {
+                    if(phone.value !== ''){
+                        if(useOfPersonalData.checked){
+                            sendFunc();
+                        } else {
+                            console.log(form);
+                            form.setCustomValidity('ыапвыафп');
+                        }
+                    }
+                });
+            }
         });
 
-        postData(body)
-            .then((response) => {
-                if(response.status !== 200){
-                    throw new Error('status network not 200');
-                }
 
-                thanks.style.display = 'block';
-                thanksFormContent.innerHTML = successMessage;
-                statusMessage.textContent = '';
-
-                clearInputAfterSubmit();
-
-                setTimeout(() => {
-                    closePopup();
-                    thanks.style.display = 'none';
-                }, 2000);
-                
-            })
-            .catch((error) => {
-                console.log(error);
-
-                thanks.style.display = 'block';
-                thanksFormContent.innerHTML = errorMessage;
-                statusMessage.textContent = '';
-
-                clearInputAfterSubmit();
+        const sendFunc = () => {        
+            form.appendChild(statusMessage);
+            statusMessage.innerHTML = loadMessage;
+            
+            const formData = new FormData(form);
+    
+            let body = {};
+            formData.forEach( (value, key) => {
+                body[key] = value;
             });
+    
+            postData(body)
+                .then((response) => {
+                    if(response.status !== 200){
+                        throw new Error('status network not 200');
+                    }
+    
+                    thanks.style.display = 'block';
+                    thanksFormContent.innerHTML = successMessage;
+                    statusMessage.textContent = '';
+    
+                    clearInputAfterSubmit();
+    
+                    setTimeout(() => {
+                        closePopup();
+                        thanks.style.display = 'none';
+                    }, 2000);
+                    
+                })
+                .catch((error) => {
+                    console.log(error);
+    
+                    thanks.style.display = 'block';
+                    thanksFormContent.innerHTML = errorMessage;
+                    statusMessage.textContent = '';
+    
+                    clearInputAfterSubmit();
+                });
+        };        
     });
 
     const postData = (body) => {

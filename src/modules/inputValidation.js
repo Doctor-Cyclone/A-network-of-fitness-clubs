@@ -35,15 +35,25 @@ const inputValidation = () => {
 
                 item.value = item.value.replace(/\d{12,}/g, item.value.substr(0, 11));
 
-                let phoneLength = item.value.split('').length;
+                let phoneLength = item.value.split('');
 
                 if(/\+?[78]([-()]*\d){10}/g.test(item.value.replace(/\s{1,}/g, ''))){                
                     return;
                 } else {
-                    //item.setCustomValidity(`Количество чисел должно быть 11`);
                     item.value = '';
-                    if(phoneLength < 11){
-                        alert(`Вы ввели ${phoneLength} цифр из 11!`);
+                    if(phoneLength[0] !== '7'){
+                        if(phoneLength[0] !== '8'){
+                            if(phoneLength.length < 11){
+                                alert(`Номер телефона должен начинаться с 8 или 7
+                                Вы ввели ${phoneLength.length} цифр из 11!`);
+                            } else {
+                                alert(`Номер телефона должен начинаться с 8 или 7`);
+                            }
+                        } else if(phoneLength.length < 11){
+                            alert(`Вы ввели ${phoneLength.length} цифр из 11!`);
+                        }
+                    } else if(phoneLength.length < 11){
+                        alert(`Вы ввели ${phoneLength.length} цифр из 11!`);
                     }
                 }
             }
