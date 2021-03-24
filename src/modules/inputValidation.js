@@ -2,7 +2,25 @@ const inputValidation = () => {
     const inputName = document.querySelectorAll('[name = "name"]'),
         inputPhone = document.querySelectorAll('[name = "phone"]');
 
-    const blurRegExp = (item) => {
+
+        const phoneCheck = (phoneLength) => {
+            if(phoneLength[0] !== '7'){
+                if(phoneLength[0] !== '8'){
+                    if(phoneLength.length !== 11){
+                        alert(`Номер телефона должен начинаться с 8 или 7
+                        Вы ввели ${phoneLength.length} цифр из 11!`);
+                    } else {
+                        alert(`Номер телефона должен начинаться с 8 или 7`);
+                    }
+                } else if(phoneLength.length !== 11){
+                    alert(`Вы ввели ${phoneLength.length} цифр из 11!`);
+                }
+            } else if(phoneLength.length !== 11){
+                alert(`Вы ввели ${phoneLength.length} цифр из 11!`);
+            } 
+        };
+
+        const blurRegExp = (item) => {
         item.addEventListener('blur', () =>{
             item.value = item.value.replace(/\-{2,}/g, '-');
             item.value = item.value.replace(/\s{2,}/g, ' ');
@@ -30,31 +48,13 @@ const inputValidation = () => {
                 item.value = item.value.replace(/\+{1,}/g, '');
                 item.value = item.value.replace(/\({1,}/g, '');
                 item.value = item.value.replace(/\){1,}/g, '');
-                item.value = item.value.replace(/^[\s]+|[ \s]+$/, '');
-                item.value = item.value.replace(/^[/-]+|[/-]+$/, '');
 
-                item.value = item.value.replace(/\d{12,}/g, item.value.substr(0, 11));
+                const phoneLength = item.value.split('');
 
-                let phoneLength = item.value.split('');
-
-                if(/\+?[78]([-()]*\d){10}/g.test(item.value.replace(/\s{1,}/g, ''))){                
-                    return;
+                if(/\+?[78]([-()]*\d){10}/g.test(item.value.replace(/\s{1,}/g, ''))){
+                    phoneCheck(phoneLength);
                 } else {
-                    item.value = '';
-                    if(phoneLength[0] !== '7'){
-                        if(phoneLength[0] !== '8'){
-                            if(phoneLength.length < 11){
-                                alert(`Номер телефона должен начинаться с 8 или 7
-                                Вы ввели ${phoneLength.length} цифр из 11!`);
-                            } else {
-                                alert(`Номер телефона должен начинаться с 8 или 7`);
-                            }
-                        } else if(phoneLength.length < 11){
-                            alert(`Вы ввели ${phoneLength.length} цифр из 11!`);
-                        }
-                    } else if(phoneLength.length < 11){
-                        alert(`Вы ввели ${phoneLength.length} цифр из 11!`);
-                    }
+                    phoneCheck(phoneLength);
                 }
             }
         });

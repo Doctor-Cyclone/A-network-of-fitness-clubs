@@ -14,6 +14,8 @@ const sendForm = (id) => {
         form = document.getElementById(id),
         useOfPersonalData = form.querySelector('input[type=checkbox]'),
         clubs = form.querySelectorAll('[name = "club-name"]'),
+        cardType = form.querySelectorAll('[name = "card-type"]'),
+        priceTotal = document.getElementById('price-total'),
         formInputs = form.querySelectorAll('input'),
 
         inputName = form.querySelectorAll('[name = "name"]'),
@@ -40,6 +42,14 @@ const sendForm = (id) => {
                 item.checked = false;
             });
         }
+        //Очистка radio-button с выбором месяцев
+        if(cardType){
+            cardType.forEach( item => {
+                item.checked = false;
+            });
+        }
+        //Очистка итоговой цены
+        priceTotal.innerHTML = 0;
         //Очистка чекбокса с обработкой персональных данных
         if(useOfPersonalData){
             useOfPersonalData.checked = false;
@@ -49,23 +59,7 @@ const sendForm = (id) => {
     form.addEventListener('submit', (event) => {
         event.preventDefault();
 
-        inputName.forEach( name => {
-            if(name.value !== ''){
-                inputPhone.forEach( phone => {
-                    if(phone.value !== ''){
-                        if(useOfPersonalData.checked){
-                            sendFunc();
-                        } else {
-                            console.log(form);
-                            form.setCustomValidity('ыапвыафп');
-                        }
-                    }
-                });
-            }
-        });
-
-
-        const sendFunc = () => {        
+        if(useOfPersonalData.checked){
             form.appendChild(statusMessage);
             statusMessage.innerHTML = loadMessage;
             
@@ -103,7 +97,10 @@ const sendForm = (id) => {
     
                     clearInputAfterSubmit();
                 });
-        };        
+        } else {
+            console.log(form);
+            form.setCustomValidity('ыапвыафп');
+        }       
     });
 
     const postData = (body) => {
