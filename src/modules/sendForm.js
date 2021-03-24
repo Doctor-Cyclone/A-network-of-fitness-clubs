@@ -59,49 +59,59 @@ const sendForm = (id) => {
     form.addEventListener('submit', (event) => {
         event.preventDefault();
 
-        if(useOfPersonalData.checked){
-            form.appendChild(statusMessage);
-            statusMessage.innerHTML = loadMessage;
-            
-            const formData = new FormData(form);
-    
-            let body = {};
-            formData.forEach( (value, key) => {
-                body[key] = value;
-            });
-    
-            postData(body)
-                .then((response) => {
-                    if(response.status !== 200){
-                        throw new Error('status network not 200');
-                    }
-    
-                    thanks.style.display = 'block';
-                    thanksFormContent.innerHTML = successMessage;
-                    statusMessage.textContent = '';
-    
-                    clearInputAfterSubmit();
-    
-                    setTimeout(() => {
-                        closePopup();
-                        thanks.style.display = 'none';
-                    }, 2000);
-                    
-                })
-                .catch((error) => {
-                    console.log(error);
-    
-                    thanks.style.display = 'block';
-                    thanksFormContent.innerHTML = errorMessage;
-                    statusMessage.textContent = '';
-    
-                    clearInputAfterSubmit();
-                });
+
+        if(useOfPersonalData){
+            if(!useOfPersonalData.checked){
+                form.setCustomValidity('ыапвыафп');
+            } else {
+                form.setCustomValidity('');
+                sendFunc();
+            } 
         } else {
-            console.log(form);
-            form.setCustomValidity('ыапвыафп');
-        }       
+            sendFunc();
+        }
+              
     });
+
+    const sendFunc = () => {
+        form.appendChild(statusMessage);
+                statusMessage.innerHTML = loadMessage;
+                
+                const formData = new FormData(form);
+        
+                let body = {};
+                formData.forEach( (value, key) => {
+                    body[key] = value;
+                });
+        
+                postData(body)
+                    .then((response) => {
+                        if(response.status !== 200){
+                            throw new Error('status network not 200');
+                        }
+        
+                        thanks.style.display = 'block';
+                        thanksFormContent.innerHTML = successMessage;
+                        statusMessage.textContent = '';
+        
+                        clearInputAfterSubmit();
+        
+                        setTimeout(() => {
+                            closePopup();
+                            thanks.style.display = 'none';
+                        }, 2000);
+                        
+                    })
+                    .catch((error) => {
+                        console.log(error);
+        
+                        thanks.style.display = 'block';
+                        thanksFormContent.innerHTML = errorMessage;
+                        statusMessage.textContent = '';
+        
+                        clearInputAfterSubmit();
+                    });
+    };
 
     const postData = (body) => {
         return fetch('./server.php', {
