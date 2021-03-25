@@ -53,8 +53,8 @@ const gallerySlider = () => {
 
     slider.addEventListener('click', event => {
         event.preventDefault();
-        console.log();
-        let target = event.target;
+
+        const target = event.target;
 
         if(!target.matches('.arrow-btn, .dot')){
             return;
