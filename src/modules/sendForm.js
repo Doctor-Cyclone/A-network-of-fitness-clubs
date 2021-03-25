@@ -18,8 +18,8 @@ const sendForm = (id) => {
         priceTotal = document.getElementById('price-total'),
         formInputs = form.querySelectorAll('input'),
 
-        inputName = form.querySelectorAll('[name = "name"]'),
-        inputPhone = form.querySelectorAll('[name = "phone"]'),
+        inputName = form.querySelector('[name = "name"]'),
+        inputPhone = form.querySelector('[name = "phone"]'),
         
         sendBtn = form.querySelector('button'),
 
@@ -59,12 +59,14 @@ const sendForm = (id) => {
     form.addEventListener('submit', (event) => {
         event.preventDefault();
 
-
         if(useOfPersonalData){
+            console.log(0);
             if(!useOfPersonalData.checked){
-                form.setCustomValidity('ыапвыафп');
+                console.log(1);
+                sendBtn.setCustomValidity('Необходимо подтвердить согласие на обработку данных!');
             } else {
-                form.setCustomValidity('');
+                console.log(2);
+                sendBtn.setCustomValidity('');
                 sendFunc();
             } 
         } else {

@@ -3,6 +3,7 @@
 import clubChoice from './modules/clubChoice';
 import popup from './modules/popup';
 import mainSlider from './modules/mainSlider';
+import gallerySlider from './modules/gallerySlider';
 import burgerMenu from './modules/burgerMenu';
 import inputValidation from './modules/inputValidation';
 import showArrowAfterScroll from './modules/showArrowAfterScroll';
@@ -12,6 +13,7 @@ import calculator from './modules/calculator.js';
 clubChoice();
 popup();
 mainSlider();
+gallerySlider();
 burgerMenu();
 showArrowAfterScroll();
 inputValidation();

@@ -1394,7 +1394,9 @@ nav.popup-menu .close-menu-btn img {
 }
 
 .slider-dots li {
-    float: left
+    float: left;
+    list-style: none;
+    cursor: pointer;
 }
 
 .slider-dots li button {
@@ -1404,7 +1406,7 @@ nav.popup-menu .close-menu-btn img {
     border: none;
     border-radius: 2px;
     color: transparent;
-    margin-right: 5px
+    margin-right: 5px;
 }
 
 .slider-dots li.slick-active button {
@@ -1611,20 +1613,35 @@ nav.popup-menu .close-menu-btn img {
 }
 
 #gallery .gallery-slider {
+    position: relative;
     padding-left: 75px;
     padding-right: 75px;
     max-width: 900px;
+    height: 400px;
     margin: 0 auto;
     text-align: center
 }
 
 #gallery .gallery-slider .slide {
-    margin: 0 auto !important;
-    width: 100%
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 100%;
+    opacity: 0;
+}
+
+.slide-active {
+    opacity: 1 !important;
 }
 
 #gallery .gallery-slider .slider-arrow {
     position: absolute;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    right: 0;
     top: 50%;
     margin-top: -18px;
     z-index: 100;
