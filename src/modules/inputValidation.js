@@ -3,20 +3,20 @@ const inputValidation = () => {
         inputPhone = document.querySelectorAll('[name = "phone"]');
 
 
-        const phoneCheck = (phoneLength) => {
+        const phoneCheck = (phoneLength, item) => {
             if(phoneLength[0] !== '7'){
                 if(phoneLength[0] !== '8'){
                     if(phoneLength.length !== 11){
-                        alert(`Номер телефона должен начинаться с 8 или 7
-Вы ввели ${phoneLength.length} цифр из 11!`);
+                        item.setCustomValidity(`Номер телефона должен начинаться с 8 или 7
+                        Вы ввели ${phoneLength.length} цифр из 11!`);
                     } else {
-                        alert(`Номер телефона должен начинаться с 8 или 7`);
+                        item.setCustomValidity(`Номер телефона должен начинаться с 8 или 7`);
                     }
                 } else if(phoneLength.length !== 11){
-                    alert(`Вы ввели ${phoneLength.length} цифр из 11!`);
+                    item.setCustomValidity(`Вы ввели ${phoneLength.length} цифр из 11!`);
                 }
             } else if(phoneLength.length !== 11){
-                alert(`Вы ввели ${phoneLength.length} цифр из 11!`);
+                item.setCustomValidity(`Вы ввели ${phoneLength.length} цифр из 11!`);
             } 
         };
 
@@ -52,9 +52,10 @@ const inputValidation = () => {
                 const phoneLength = item.value.split('');
 
                 if(/\+?[78]([-()]*\d){10}/g.test(item.value.replace(/\s{1,}/g, ''))){
+                    item.setCustomValidity('');
                     phoneCheck(phoneLength);
                 } else {
-                    phoneCheck(phoneLength);
+                    phoneCheck(phoneLength, item);
                 }
             }
         });
