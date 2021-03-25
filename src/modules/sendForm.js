@@ -17,8 +17,8 @@ const sendForm = (id) => {
         personalData = form.querySelector('.personal-data'),
 
         clubs = form.querySelector('.club'),
-        clubMozaika = form.querySelector('#card_leto_mozaika'),
-        clibSchelkovo = form.querySelector('#card_leto_schelkovo'),
+        clubMozaika = form.querySelector('[value = "mozaika"]'),
+        clibSchelkovo = form.querySelector('[value = "schelkovo"]'),
 
         cardType = form.querySelectorAll('[name = "card-type"]'),
         priceTotal = document.getElementById('price-total'),
@@ -62,26 +62,36 @@ const sendForm = (id) => {
         const createErrorMessage = () => {
             const error = document.createElement('div');
             error.classList.add('error-message');
-            error.style.cssText = 'color: red; font-size: 20px; margin-top: 15px';
+            error.style.cssText = 'color: red; font-size: 16px; margin-top: 15px';
             personalData.append(error);
         } ;
         //Проверка чекбокса с персональными данными
         const checkSseOfPersonalDataCheckbox = () => {
             if(!useOfPersonalData.checked){
+                createErrorMessage();
                 form.querySelector('.error-message').textContent = 'Необходимо подтвердить согласие на обработку данных!';
             } else {
-                form.querySelector('.error-message').remove();
-                sendFunc();
+                if(form.querySelector('.error-message')){
+                    form.querySelector('.error-message').remove();
+                    sendFunc();
+                } else {
+                    sendFunc();
+                }
             } 
         };
         //Проверка чекбокса с выбором клуба
         const checkClubCheckbox = () => {
             if(!clubMozaika.checked && !clibSchelkovo.checked){
+                createErrorMessage();
                 form.querySelector('.error-message').textContent = 'Необходимо выбрать клуб!';
             } else {
-                form.querySelector('.error-message').remove();
-                sendFunc();
-            } 
+                if(form.querySelector('.error-message')){
+                    form.querySelector('.error-message').remove();
+                    sendFunc();
+                } else {
+                    sendFunc();
+                }  
+            }
         };
         //Проверка чекбоксов с клубом, ценой и персональными данными
         const checkBothCheckbox = () => {
@@ -113,21 +123,9 @@ const sendForm = (id) => {
                 checkBothCheckbox();
             }
         } else if(useOfPersonalData){
-            if(form.querySelector('.error-message')){
-                checkSseOfPersonalDataCheckbox();
-                return;
-            } else {
-                createErrorMessage();
-                checkSseOfPersonalDataCheckbox();
-            }
+            checkSseOfPersonalDataCheckbox();
         } else if(clubs){
-            if(form.querySelector('.error-message')){
-                checkClubCheckbox();
-                return;
-            } else {
-                createErrorMessage();
-                checkClubCheckbox();
-            }
+            checkClubCheckbox();
         }
       
     });
