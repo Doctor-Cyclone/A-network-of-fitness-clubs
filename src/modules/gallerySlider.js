@@ -68,7 +68,6 @@ const gallerySlider = () => {
         } else if(target.matches('.prev')){
             currentSlide--;
         } else if(target.matches('.dot')){
-            console.log(target);
             dot.forEach((item, index) => {
                 if(item === target){
                     currentSlide = index;
