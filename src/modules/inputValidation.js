@@ -8,7 +8,7 @@ const inputValidation = () => {
                 if(phoneLength[0] !== '8'){
                     if(phoneLength.length !== 11){
                         alert(`Номер телефона должен начинаться с 8 или 7
-                        Вы ввели ${phoneLength.length} цифр из 11!`);
+Вы ввели ${phoneLength.length} цифр из 11!`);
                     } else {
                         alert(`Номер телефона должен начинаться с 8 или 7`);
                     }

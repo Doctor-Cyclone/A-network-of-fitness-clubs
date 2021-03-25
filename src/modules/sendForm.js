@@ -12,16 +12,17 @@ const sendForm = (id) => {
         statusMessage = document.createElement('div'),
 
         form = document.getElementById(id),
-        useOfPersonalData = form.querySelector('input[type=checkbox]'),
-        clubs = form.querySelectorAll('[name = "club-name"]'),
+
+        useOfPersonalData = form.querySelector('[type = "checkbox"]'),
+        personalData = form.querySelector('.personal-data'),
+
+        clubs = form.querySelector('.club'),
+        clubMozaika = form.querySelector('#card_leto_mozaika'),
+        clibSchelkovo = form.querySelector('#card_leto_schelkovo'),
+
         cardType = form.querySelectorAll('[name = "card-type"]'),
         priceTotal = document.getElementById('price-total'),
         formInputs = form.querySelectorAll('input'),
-
-        inputName = form.querySelector('[name = "name"]'),
-        inputPhone = form.querySelector('[name = "phone"]'),
-        
-        sendBtn = form.querySelector('button'),
 
         thanks = document.getElementById('thanks'),
         thanksFormContent = thanks.querySelector('.form-content');
@@ -38,9 +39,8 @@ const sendForm = (id) => {
         });
         //Очистка radio-button с выбором клуба
         if(clubs){
-            clubs.forEach( item => {
-                item.checked = false;
-            });
+            clubMozaika.checked = false;
+            clibSchelkovo.checked = false;
         }
         //Очистка radio-button с выбором месяцев
         if(cardType){
@@ -58,21 +58,78 @@ const sendForm = (id) => {
 
     form.addEventListener('submit', (event) => {
         event.preventDefault();
-
-        if(useOfPersonalData){
-            console.log(0);
+        //Создание блока с текстом ошибки
+        const createErrorMessage = () => {
+            const error = document.createElement('div');
+            error.classList.add('error-message');
+            error.style.cssText = 'color: red; font-size: 20px; margin-top: 15px';
+            personalData.append(error);
+        } ;
+        //Проверка чекбокса с персональными данными
+        const checkSseOfPersonalDataCheckbox = () => {
             if(!useOfPersonalData.checked){
-                console.log(1);
-                sendBtn.setCustomValidity('Необходимо подтвердить согласие на обработку данных!');
+                form.querySelector('.error-message').textContent = 'Необходимо подтвердить согласие на обработку данных!';
             } else {
-                console.log(2);
-                sendBtn.setCustomValidity('');
+                form.querySelector('.error-message').remove();
                 sendFunc();
             } 
-        } else {
-            sendFunc();
+        };
+        //Проверка чекбокса с выбором клуба
+        const checkClubCheckbox = () => {
+            if(!clubMozaika.checked && !clibSchelkovo.checked){
+                form.querySelector('.error-message').textContent = 'Необходимо выбрать клуб!';
+            } else {
+                form.querySelector('.error-message').remove();
+                sendFunc();
+            } 
+        };
+        //Проверка чекбоксов с клубом, ценой и персональными данными
+        const checkBothCheckbox = () => {
+            for(let i = 0; i < cardType.length; i++){
+                if(cardType[i].checked){
+                    if(!clubMozaika.checked && !clibSchelkovo.checked && !useOfPersonalData.checked){
+                        form.querySelector('.error-message').textContent = 'Необходимо выбрать клуб и подтвердить согласие на обработку данных!';
+                    } else if(!useOfPersonalData.checked){
+                        form.querySelector('.error-message').textContent = 'Необходимо подтвердить согласие на обработку данных!';
+                    } else if(!clubMozaika.checked && !clibSchelkovo.checked){
+                        form.querySelector('.error-message').textContent = 'Необходимо выбрать клуб!';
+                    } else {
+                        form.querySelector('.error-message').remove();
+                        sendFunc();
+                    }
+                    break;
+                } else {
+                    form.querySelector('.error-message').textContent = 'Необходимо выбрать кол-во месяцев!';
+                }
+            }
+        };
+
+        if(useOfPersonalData && clubs){
+            if(form.querySelector('.error-message')){
+                checkBothCheckbox();
+                return;
+            } else {
+                createErrorMessage();
+                checkBothCheckbox();
+            }
+        } else if(useOfPersonalData){
+            if(form.querySelector('.error-message')){
+                checkSseOfPersonalDataCheckbox();
+                return;
+            } else {
+                createErrorMessage();
+                checkSseOfPersonalDataCheckbox();
+            }
+        } else if(clubs){
+            if(form.querySelector('.error-message')){
+                checkClubCheckbox();
+                return;
+            } else {
+                createErrorMessage();
+                checkClubCheckbox();
+            }
         }
-              
+      
     });
     //Функция отправки
     const sendFunc = () => {
