@@ -1,4 +1,4 @@
-const carouselSlider = () => {
+const sliderCarouse = () => {
     const slider = document.querySelector('.services-slider'),
         sliderContainer = slider.querySelector('.services-slider-container'),
         slide = slider.querySelector('slide');
@@ -29,4 +29,4 @@ const carouselSlider = () => {
     });
 };
 
-export default carouselSlider;
+export default sliderCarouse;

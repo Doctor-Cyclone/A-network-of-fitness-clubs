@@ -1,4 +1,4 @@
-const mainSlider = () => {
+const sliderMain = () => {
     const slider = document.querySelector('.main-slider'),
         slideText = slider.querySelectorAll('.slide-text'),
         slide = slider.querySelectorAll('.slide');
@@ -41,4 +41,4 @@ const mainSlider = () => {
     startSlide(2000);
 };
 
-export default mainSlider;
+export default sliderMain;

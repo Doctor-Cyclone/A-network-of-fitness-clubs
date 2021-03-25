@@ -3,9 +3,9 @@
 import clubChoice from './modules/clubChoice';
 import popup from './modules/popup';
 
-import mainSlider from './modules/mainSlider';
-import gallerySlider from './modules/gallerySlider';
-import carouselSlider from './modules/carouselSlider';
+import sliderMain from './modules/sliderMain';
+import sliderGallery from './modules/sliderGallery';
+import sliderCarouse from './modules/sliderCarouse';
 
 import burgerMenu from './modules/burgerMenu';
 import inputValidation from './modules/inputValidation';
@@ -16,9 +16,9 @@ import calculator from './modules/calculator.js';
 clubChoice();
 popup();
 
-mainSlider();
-gallerySlider();
-carouselSlider();
+sliderMain();
+sliderGallery();
+sliderCarouse();
 burgerMenu();
 showArrowAfterScroll();
 inputValidation();

@@ -1,4 +1,4 @@
-const gallerySlider = () => {
+const sliderGallery = () => {
     const slider = document.querySelector('.gallery-slider'),
     slide = slider.querySelectorAll('.slide'),
     dotBox = document.querySelector('.slider-dots'),
@@ -100,4 +100,4 @@ const gallerySlider = () => {
     startSlide(3000);
     };
 
-export default gallerySlider;
+export default sliderGallery;
