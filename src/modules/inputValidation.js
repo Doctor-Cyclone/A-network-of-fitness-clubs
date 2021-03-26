@@ -21,7 +21,7 @@ const inputValidation = () => {
         };
 
         const blurRegExp = (item) => {
-        item.addEventListener('blur', () =>{
+        item.addEventListener('input', () =>{
             item.value = item.value.replace(/\-{2,}/g, '-');
             item.value = item.value.replace(/\s{2,}/g, ' ');
             item.value = item.value.replace(/\+{2,}/g, '+');
