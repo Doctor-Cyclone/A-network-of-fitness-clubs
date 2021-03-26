@@ -5,12 +5,48 @@ const calculator = () => {
 		cardOrder = document.getElementById('card_order'),
         clubs = document.querySelectorAll('#card_order [name = "club-name"]');
 
-	const countSum = () => {
-		let total = 0;
+		priceTotal.innerHTML = 0;
 
-        
-	};
-	priceTotal.innerHTML = 0;
+		const getPrice = (htmlText, nameTimes) => {
+			const parser = new DOMParser().parseFromString(htmlText, 'text/html'),
+				cardsTypes = parser.querySelector('.cards-types'),
+				timesValue = cardsTypes.querySelectorAll('[name = "card-type"]'),
+				timesLabel = cardsTypes.querySelectorAll('label');
+		
+			timesValue.forEach( item => {
+				if(item.value === nameTimes){
+					timesLabel.forEach( label => {
+						if(label.getAttribute('for') === item.getAttribute('id')){
+							const cost = label.querySelector('.cost').textContent;
+							let finalyCost = cost.substr(0, cost.length - 1);
+							if(promoСode.value === 'ТЕЛО2020'){
+								finalyCost -= Math.ceil((finalyCost / 100 * 30));
+								priceTotal.innerHTML = finalyCost;
+							} else {
+								priceTotal.innerHTML = finalyCost;
+							}
+						}
+					});
+				}
+			});
+		};
+
+		const mozaikaGetPriceRequest = (nameTimes) => {
+			fetch('mozaika.html')
+			.then( response => response.text())
+			.then( htmlText => {
+				getPrice(htmlText, nameTimes);
+			});
+		};
+
+		const schelkovoGetPriceRequest = (nameTimes) => {
+			fetch('schelkovo.html')
+			.then( response => response.text())
+			.then( htmlText => {
+				getPrice(htmlText, nameTimes);
+			});
+		};
+
 	cardOrder.addEventListener('change', event => {
         const target = event.target;
 		
@@ -19,49 +55,17 @@ const calculator = () => {
 				if(item.value === 'mozaika'){
 					times.forEach( item => {
 						if(item.checked){
-							switch(item.value){
-								case '1': 
-									priceTotal.innerHTML = 1999;
-									break;
-								case '6': 
-									priceTotal.innerHTML = 9900;
-									break;
-								case '9': 
-									priceTotal.innerHTML = 13900;
-									break;
-								case '12': 
-									priceTotal.innerHTML = 19900;
-									break;	
-							}
+							mozaikaGetPriceRequest(item.value + 's');
 						}
 					});
 				} else {
 					times.forEach( item => {
 						if(item.checked){
-							switch(item.value){
-								case '1': 
-									priceTotal.innerHTML = 2999;
-									break;
-								case '6': 
-									priceTotal.innerHTML = 14990;
-									break;
-								case '9': 
-									priceTotal.innerHTML = 21990;
-									break;
-								case '12': 
-									priceTotal.innerHTML = 24990;
-									break;	
-							}
+							schelkovoGetPriceRequest(item.value + 's');
 						}
 					});
 				}
 				
-			}
-		});
-
-		times.forEach( item => {
-			if(target === item){
-				countSum();
 			}
 		});	
     });    
