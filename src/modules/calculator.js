@@ -31,16 +31,8 @@ const calculator = () => {
 			});
 		};
 
-		const mozaikaGetPriceRequest = (nameTimes) => {
-			fetch('mozaika.html')
-			.then( response => response.text())
-			.then( htmlText => {
-				getPrice(htmlText, nameTimes);
-			});
-		};
-
-		const schelkovoGetPriceRequest = (nameTimes) => {
-			fetch('schelkovo.html')
+		const getPriceRequest = (nameTimes, url) => {
+			fetch(url)
 			.then( response => response.text())
 			.then( htmlText => {
 				getPrice(htmlText, nameTimes);
@@ -55,13 +47,13 @@ const calculator = () => {
 				if(item.value === 'mozaika'){
 					times.forEach( item => {
 						if(item.checked){
-							mozaikaGetPriceRequest(item.value + 's');
+							getPriceRequest(item.value + 's', 'mozaika.html');
 						}
 					});
 				} else {
 					times.forEach( item => {
 						if(item.checked){
-							schelkovoGetPriceRequest(item.value + 's');
+							getPriceRequest(item.value + 's', 'schelkovo.html');
 						}
 					});
 				}
