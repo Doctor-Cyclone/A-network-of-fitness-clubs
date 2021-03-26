@@ -13,16 +13,23 @@ import showArrowAfterScroll from './modules/showArrowAfterScroll';
 import sendForm from './modules/sendForm';
 import calculator from './modules/calculator.js';
 
+
 clubChoice();
 popup();
 
 sliderMain();
 sliderGallery();
 sliderCarouse();
+
 burgerMenu();
 showArrowAfterScroll();
 inputValidation();
-calculator();
+
+
+if(document.querySelector('.price')){
+    calculator();
+}
+
 
 sendForm('banner-form');
 sendForm('card_order');

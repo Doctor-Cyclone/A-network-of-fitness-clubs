@@ -49,7 +49,9 @@ const sendForm = (id) => {
             });
         }
         //Очистка итоговой цены
-        priceTotal.innerHTML = 0;
+        if(priceTotal){
+            priceTotal.innerHTML = 0;
+        }
         //Очистка чекбокса с обработкой персональных данных
         if(useOfPersonalData){
             useOfPersonalData.checked = false;

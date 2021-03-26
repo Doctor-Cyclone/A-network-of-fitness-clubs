@@ -19,6 +19,7 @@ const calculator = () => {
 						if(label.getAttribute('for') === item.getAttribute('id')){
 							const cost = label.querySelector('.cost').textContent;
 							let finalyCost = cost.substr(0, cost.length - 1);
+							
 							if(promoСode.value === 'ТЕЛО2020'){
 								finalyCost -= Math.ceil((finalyCost / 100 * 30));
 								priceTotal.innerHTML = finalyCost;
@@ -39,9 +40,7 @@ const calculator = () => {
 			});
 		};
 
-	cardOrder.addEventListener('change', event => {
-        const target = event.target;
-		
+	cardOrder.addEventListener('change', () => {	
 		clubs.forEach( item => {
 			if(item.checked){
 				if(item.value === 'mozaika'){
@@ -57,7 +56,6 @@ const calculator = () => {
 						}
 					});
 				}
-				
 			}
 		});	
     });    
