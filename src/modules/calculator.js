@@ -5,7 +5,7 @@ const calculator = () => {
 		cardOrder = document.getElementById('card_order'),
         clubs = document.querySelectorAll('#card_order [name = "club-name"]');
 
-		priceTotal.innerHTML = 0;
+		//priceTotal.innerHTML = 0;
 
 		const getPrice = (htmlText, nameTimes) => {
 			const parser = new DOMParser().parseFromString(htmlText, 'text/html'),
