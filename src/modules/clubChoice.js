@@ -18,7 +18,6 @@ const clubChoice = () => {
 			}
 		} else if(!target.closest('.club-select')){
 			if(clubsList.style.display === 'block'){
-				console.log(1);
 				clubsList.style.display = 'none';
 			}
 		}
