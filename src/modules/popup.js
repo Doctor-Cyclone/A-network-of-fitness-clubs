@@ -17,11 +17,7 @@ const popup = () => {
             } else if(target.closest('.fixed-gift')){
                 fixedGift.style.display = 'none';
                 giftForm.style.display = 'block';
-            } else if(target.closest('.close-form')){
-                closePopup();
-            } else if(target.closest('.overlay')){
-                closePopup();
-            } else if(target.closest('.close-btn')){
+            } else if(target.closest('.close-form') || target.closest('.overlay') || target.closest('.close-btn')){
                 closePopup();
             }
         }

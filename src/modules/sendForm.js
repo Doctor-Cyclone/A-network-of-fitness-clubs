@@ -10,21 +10,27 @@ const sendForm = (id) => {
                         <button class="btn close-btn">OK</button>`,
         loadMessage = 'Загрузка...',
         statusMessage = document.createElement('div'),
-
+        //Форма
         form = document.getElementById(id),
-
-        useOfPersonalData = form.querySelector('[type = "checkbox"]'),
+        //Обёртка для checkbox'a с Персональными данными
         personalData = form.querySelector('.personal-data'),
-
+        //Checkbox с Персональными данными
+        useOfPersonalData = form.querySelector('[type = "checkbox"]'),
+        //Обёртка для клубов
         clubs = form.querySelector('.club'),
+        //Клуб Мозайка
         clubMozaika = form.querySelector('[value = "mozaika"]'),
+        //Клуб Щёлково
         clibSchelkovo = form.querySelector('[value = "schelkovo"]'),
-
+        //Инпуты с ценой
         cardType = form.querySelectorAll('[name = "card-type"]'),
+        //Итоговая цена
         priceTotal = document.getElementById('price-total'),
+        //Инпуты для ввода данных
         formInputs = form.querySelectorAll('input'),
-
+        //Popap СПАСИБО
         thanks = document.getElementById('thanks'),
+        //Контент внутри POPAP
         thanksFormContent = thanks.querySelector('.form-content');
 
         statusMessage.style.color = '#FFD11A';
@@ -71,7 +77,7 @@ const sendForm = (id) => {
         const checkSseOfPersonalDataCheckbox = () => {
             if(!useOfPersonalData.checked){
                 createErrorMessage();
-                form.querySelector('.error-message').textContent = 'Необходимо подтвердить согласие на обработку данных!';
+                form.querySelector('.error-message').textContent = '*необходимо подтвердить согласие на обработку данных!';
             } else {
                 if(form.querySelector('.error-message')){
                     form.querySelector('.error-message').remove();
@@ -85,7 +91,7 @@ const sendForm = (id) => {
         const checkClubCheckbox = () => {
             if(!clubMozaika.checked && !clibSchelkovo.checked){
                 createErrorMessage();
-                form.querySelector('.error-message').textContent = 'Необходимо выбрать клуб!';
+                form.querySelector('.error-message').textContent = '*необходимо выбрать клуб!';
             } else {
                 if(form.querySelector('.error-message')){
                     form.querySelector('.error-message').remove();
@@ -100,18 +106,18 @@ const sendForm = (id) => {
             for(let i = 0; i < cardType.length; i++){
                 if(cardType[i].checked){
                     if(!clubMozaika.checked && !clibSchelkovo.checked && !useOfPersonalData.checked){
-                        form.querySelector('.error-message').textContent = 'Необходимо выбрать клуб и подтвердить согласие на обработку данных!';
+                        form.querySelector('.error-message').textContent = '*необходимо выбрать клуб и подтвердить согласие на обработку данных!';
                     } else if(!useOfPersonalData.checked){
-                        form.querySelector('.error-message').textContent = 'Необходимо подтвердить согласие на обработку данных!';
+                        form.querySelector('.error-message').textContent = '*необходимо подтвердить согласие на обработку данных!';
                     } else if(!clubMozaika.checked && !clibSchelkovo.checked){
-                        form.querySelector('.error-message').textContent = 'Необходимо выбрать клуб!';
+                        form.querySelector('.error-message').textContent = '*необходимо выбрать клуб!';
                     } else {
                         form.querySelector('.error-message').remove();
                         sendFunc();
                     }
                     break;
                 } else {
-                    form.querySelector('.error-message').textContent = 'Необходимо выбрать кол-во месяцев!';
+                    form.querySelector('.error-message').textContent = '*необходимо выбрать кол-во месяцев!';
                 }
             }
         };

@@ -2,39 +2,20 @@ const inputValidation = () => {
     const inputName = document.querySelectorAll('[name = "name"]'),
         inputPhone = document.querySelectorAll('[name = "phone"]');
 
+    const phoneCheck = (phoneLength, item) => {
+        if(phoneLength[0] !== '7' && phoneLength[0] !== '8' && (phoneLength.length > 11 || phoneLength.length < 7)){
+            item.setCustomValidity(`Номер телефона должен начинаться с 8 или 7!
+                    Вы ввели ${phoneLength.length} цифр. Количество цифр должно быть в диапазоне от 7 до 11!`);
+        } else if(phoneLength.length > 11 || phoneLength.length < 7){
+            item.setCustomValidity(`Вы ввели ${phoneLength.length} цифр. Количество цифр должно быть в диапазоне от 7 до 11!`);
+        } else if(phoneLength[0] !== '7' && phoneLength[0] !== '8'){
+            item.setCustomValidity(`Номер телефона должен начинаться с 8 или 7!`);
+        } else {
+            item.setCustomValidity(``);
+        }
+    };
 
-        // const phoneCheck = (phoneLength, item) => {
-        //     if(phoneLength[0] !== '7'){
-        //         if(phoneLength[0] !== '8'){
-        //             if(phoneLength.length > 11 || phoneLength.length < 7){
-        //                 item.setCustomValidity(`Номер телефона должен начинаться с 8 или 7!
-        //                 Вы ввели ${phoneLength.length} цифр. Количество цифр должно быть в диапазоне от 7 до 11!`);
-        //             } else {
-        //                 item.setCustomValidity(`Номер телефона должен начинаться с 8 или 7!`);
-        //             }
-        //         } else if(phoneLength.length > 11 || phoneLength.length < 7){
-        //             item.setCustomValidity(`Вы ввели ${phoneLength.length} цифр. Количество цифр должно быть в диапазоне от 7 до 11!`);
-        //         }
-        //     } else if(phoneLength.length > 11 || phoneLength.length < 7){
-        //         item.setCustomValidity(`Вы ввели ${phoneLength.length} цифр. Количество цифр должно быть в диапазоне от 7 до 11!`);
-        //     } 
-        // };
-        const phoneCheck = (phoneLength, item) => {
-            if(phoneLength[0] !== '7' && phoneLength[0] !== '8' && (phoneLength.length > 11 || phoneLength.length < 7)){
-                item.setCustomValidity(`Номер телефона должен начинаться с 8 или 7!
-                        Вы ввели ${phoneLength.length} цифр. Количество цифр должно быть в диапазоне от 7 до 11!`);
-
-            } else if(phoneLength.length > 11 || phoneLength.length < 7){
-                item.setCustomValidity(`Вы ввели ${phoneLength.length} цифр. Количество цифр должно быть в диапазоне от 7 до 11!`);
-
-            } else if(phoneLength[0] !== '7' && phoneLength[0] !== '8'){
-                item.setCustomValidity(`Номер телефона должен начинаться с 8 или 7!`);
-            } else {
-                item.setCustomValidity(``);
-            }
-        };
-
-        const blurRegExp = (item) => {
+    const blurRegExp = (item) => {
         item.addEventListener('blur', () =>{
             item.value = item.value.replace(/\-{2,}/g, '-');
             item.value = item.value.replace(/\s{2,}/g, ' ');

@@ -5,6 +5,7 @@ const closePopup = (target) => {
 
     freeVisitForm.style.display = 'none';
     callbackForm.style.display = 'none';
+    
     if(giftForm){
         giftForm.style.display = 'none';
     }
