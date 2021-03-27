@@ -29,6 +29,8 @@ const inputValidation = () => {
 
             } else if(phoneLength[0] !== '7' && phoneLength[0] !== '8'){
                 item.setCustomValidity(`Номер телефона должен начинаться с 8 или 7!`);
+            } else {
+                item.setCustomValidity(``);
             }
         };
 
@@ -60,15 +62,6 @@ const inputValidation = () => {
                 item.value = item.value.replace(/\+{1,}/g, '');
                 item.value = item.value.replace(/\({1,}/g, '');
                 item.value = item.value.replace(/\){1,}/g, '');
-
-                const phoneLength = item.value.split('');
-
-                if(/\+?[78]([-()]*\d){7,10}/g.test(item.value.replace(/\s{1,}/g, ''))){
-                    item.setCustomValidity('');
-                    phoneCheck(phoneLength, item);
-                } else {
-                    phoneCheck(phoneLength, item);
-                }
             }
         });
     };
@@ -82,6 +75,7 @@ const inputValidation = () => {
         } else {
             item.addEventListener('input', () =>{
                 item.value = item.value.replace(/[^-()\d\+ ]/g, '');
+                phoneCheck(item.value, item);
             });
             blurRegExp(item);
         }

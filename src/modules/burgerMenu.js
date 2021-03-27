@@ -35,8 +35,9 @@ const burgerMenu = () => {
                 };
             }
         });
-    
-        fixedMenu();
+        if(menuBtnDisplay === 'block'){
+            fixedMenu();
+        }
     };
     fixedMenuFunc();
     
