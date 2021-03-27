@@ -1,6 +1,5 @@
 const clubChoice = () => {
     const clubSelect = document.querySelector('.club-select'),
-		x = clubSelect.querySelectorAll('clubs-list'),
         clubsList = clubSelect.querySelector('ul');
 
 	window.addEventListener('click', (event) => {
