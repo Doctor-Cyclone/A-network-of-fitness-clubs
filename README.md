@@ -2,7 +2,7 @@
 Проект выполнил Кирилл Демидов
 
 ## Ссылка на сайт
-https://doctor-cyclone.github.io/BODY---A_network_of_fitness_clubs/
+https://doctor-cyclone.github.io/A-network-of-fitness-clubs/
 
 ## Используемые технологии
 - HTML
