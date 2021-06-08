@@ -2,7 +2,7 @@
 Проект выполнил Кирилл Демидов
 
 ## Ссылка на сайт
-https://doctor-cyclone.github.io/A-network-of-fitness-clubs/
+https://doctor-cyclone.github.io/A-network-of-fitness-clubs-WEBSITE-/
 
 ## Используемые технологии
 - HTML
